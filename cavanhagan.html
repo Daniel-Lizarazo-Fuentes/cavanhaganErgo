@@ -2,8 +2,70 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <style>
+      .container {
+        background-color: #f4f4f6;
+        box-shadow: inset 1px 1px 2px #2e3138;
+        border-radius: 12px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+      }
+      .container .fake {
+        width: 5px;
+        height: 5px;
+      }
+      .container .itemsContainer {
+        padding: 16px;
+      }
+      .container .itemsContainer h2 {
+        color: #17191c;
+        font-size: 32px;
+        margin: 0;
+      }
+      .container .itemsContainer .form {
+        padding: 16px;
+      }
+      .container .itemsContainer .form form {
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+      }
+      .container .itemsContainer .form form div label {
+        margin: 5px;
+        display: flex;
+        justify-content: left;
+      }
+      .container .itemsContainer .form form div label input {
+        max-width: 50px;
+        margin: 0;
+      }
+      .container .itemsContainer .form form input {
+        border-radius: 5px;
+        margin: 8px 0 8px 0;
+        padding: 16px;
+        max-width: 600px;
+        width: 100%;
+        border: 1px solid #c2ccd6;
+      }
+      .container .itemsContainer .form form input::placeholder {
+        font-family: "Inter", "Arial";
+        font-size: 16px;
+      }
+      .container .itemsContainer .form .submit {
+        font-size: 20px;
+        border: none;
+        background-color: #1a5ee6;
+        color: white;
+        border-radius: 7px;
+        padding: 10px 35px;
+        box-shadow: inset 0 1px 3px #759ef0;
+      }
+    </style>
     <script language="JavaScript">
       function calculate() {
+        //get all values from the form and make them floats (kind of number)
         let weight = parseFloat(document.getElementById("user_Height").value);
         let height = parseFloat(document.getElementById("user_Weight").value);
         let arm_span = parseFloat(document.getElementById("arm_span").value);
@@ -15,64 +77,152 @@
         let flexibility = parseFloat(
           document.getElementById("flexibility").value
         );
-        document.getElementById("display").innerHTML =
-          weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
+
+        // set resultFormula to -1, if something goes wrong here your time will be -1
+        let resultFormula = -1;
+        let gender = getRadioVal(
+          document.getElementById("calculateForm"),
+          "gender"
+        );
+
+        // different formulas based on male/female/other
+        if (gender === "female") {
+          //Insert formula when done
+          resultFormula =
+            weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
+        } else if (gender === "male") {
+          //Insert formula when done
+          resultFormula =
+            weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
+        } else {
+          //Insert formula when done
+          resultFormula =
+            weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
+        }
+
+        let hours = Number(round(resultFormula / 3600, 0)) + " hour(s) and ";
+        resultFormula = resultFormula % 3600;
+        let minutes = Number(round(resultFormula / 60, 0)) + " minute(s) and ";
+        resultFormula = resultFormula % 60;
+        let seconds = Number(round(resultFormula, 0)) + " second(s) and ";
+        resultFormula = resultFormula % 1;
+        let miliSeconds =
+          Number(round(resultFormula * 1000, 0)) + " milisecond(s)";
+
+        let finalResult = (document.getElementById("display").innerHTML =
+          "Your estimated time for 2,000m of rowing is: " +
+          hours +
+          minutes +
+          seconds +
+          miliSeconds);
+      }
+
+      //rounding function
+      function round(num, dec) {
+        const [sv, ev] = num.toString().split("e");
+        return Number(
+          Number(Math.round(parseFloat(sv + "e" + dec)) + "e-" + dec) +
+            "e" +
+            (ev || 0)
+        );
+      }
+
+      //function to get the value of the male/female/other
+      function getRadioVal(form, name) {
+        var val;
+        // get list of radio buttons with specified name
+        var radios = form.elements[name];
+
+        // loop through list of radio buttons
+        for (var i = 0, len = radios.length; i < len; i++) {
+          if (radios[i].checked) {
+            // radio checked?
+            val = radios[i].value; // if so, hold its value in val
+            break; // and break out of for loop
+          }
+        }
+        return val; // return value of checked radio or undefined if none checked
       }
     </script>
   </head>
   <body>
-    <h2>2,000m Rowing Ergometer Estimator</h2>
-    <form>
-      <input
-        type="number"
-        placeholder="Height in cm"
-        name="message"
-        id="user_Height"
-        required
-      />
-      <input
-        type="number"
-        placeholder="Weight in kg"
-        name="message"
-        id="user_Weight"
-        required
-      />
-      <input
-        type="number"
-        placeholder="Arm Span in cm"
-        name="message"
-        id="arm_span"
-        required
-      />
-      <input
-        type="number"
-        placeholder="Leg lenght in cm"
-        name="message"
-        id="leg_lenght"
-        required
-      />
-      <input
-        type="number"
-        placeholder="100m in seconds"
-        name="message"
-        id="m100"
-        required
-      />
-      <input
-        type="number"
-        placeholder="500m in seconds"
-        name="message"
-        id="m500"
-        required
-      />
-      <input
-        type="number"
-        placeholder="Flexibility in rating/10"
-        id="flexibility"
-        required
-      />
-    </form>
-    <input type="submit" onclick="calculate();" /><br />
-    <p><span id="display"></span></p>
+    <div class="container">
+      <div class="fake"></div>
+      <div class="itemsContainer">
+        <h2>2,000m Rowing Ergometer Estimator</h2>
+        <div class="form">
+          <form id="calculateForm">
+            <div>
+              <label for="male"
+                ><input type="radio" id="male" name="gender" value="male" />
+                Male</label
+              >
+
+              <label for="female">
+                <input type="radio" id="female" name="gender" value="female" />
+                Female</label
+              >
+
+              <label for="other"
+                ><input type="radio" id="other" name="gender" value="other" />
+                Other</label
+              >
+            </div>
+
+            <input
+              type="number"
+              placeholder="Height in cm"
+              name="message"
+              id="user_Height"
+              required
+            />
+            <input
+              type="number"
+              placeholder="Weight in kg"
+              name="message"
+              id="user_Weight"
+              required
+            />
+            <input
+              type="number"
+              placeholder="Arm Span in cm"
+              name="message"
+              id="arm_span"
+              required
+            />
+            <input
+              type="number"
+              placeholder="Leg lenght in cm"
+              name="message"
+              id="leg_lenght"
+              required
+            />
+            <input
+              type="number"
+              placeholder="100m in seconds"
+              name="message"
+              id="m100"
+              required
+            />
+            <input
+              type="number"
+              placeholder="500m in seconds"
+              name="message"
+              id="m500"
+              required
+            />
+            <input
+              type="number"
+              placeholder="Flexibility in rating/10"
+              id="flexibility"
+              required
+            />
+          </form>
+          <input class="submit" type="submit" onclick="calculate();" /><br />
+          <p><span id="display"></span></p>
+        </div>
+      </div>
+      <div class="fake"></div>
+    </div>
   </body>
 </html>
