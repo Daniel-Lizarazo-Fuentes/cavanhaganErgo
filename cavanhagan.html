@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script language="JavaScript">
+      function calculate() {
+        let weight = parseFloat(document.getElementById("user_Height").value);
+        let height = parseFloat(document.getElementById("user_Weight").value);
+        let arm_span = parseFloat(document.getElementById("arm_span").value);
+        let leg_lenght = parseFloat(
+          document.getElementById("leg_lenght").value
+        );
+        let m100 = parseFloat(document.getElementById("m100").value);
+        let m500 = parseFloat(document.getElementById("m500").value);
+        let flexibility = parseFloat(
+          document.getElementById("flexibility").value
+        );
+        document.getElementById("display").innerHTML =
+          weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>2,000m Rowing Ergometer Estimator</h2>
+    <form>
+      <input
+        type="number"
+        placeholder="Height in cm"
+        name="message"
+        id="user_Height"
+        required
+      />
+      <input
+        type="number"
+        placeholder="Weight in kg"
+        name="message"
+        id="user_Weight"
+        required
+      />
+      <input
+        type="number"
+        placeholder="Arm Span in cm"
+        name="message"
+        id="arm_span"
+        required
+      />
+      <input
+        type="number"
+        placeholder="Leg lenght in cm"
+        name="message"
+        id="leg_lenght"
+        required
+      />
+      <input
+        type="number"
+        placeholder="100m in seconds"
+        name="message"
+        id="m100"
+        required
+      />
+      <input
+        type="number"
+        placeholder="500m in seconds"
+        name="message"
+        id="m500"
+        required
+      />
+      <input
+        type="number"
+        placeholder="Flexibility in rating/10"
+        id="flexibility"
+        required
+      />
+    </form>
+    <input type="submit" onclick="calculate();" /><br />
+    <p><span id="display"></span></p>
+  </body>
+</html>
