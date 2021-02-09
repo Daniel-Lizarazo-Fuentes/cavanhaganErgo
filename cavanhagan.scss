@@ -1,5 +1,5 @@
 .container {
-    
+  font-family: "Inter", "Roboto";
   background-color: hsl(220, 10%, 96%);
   box-shadow: inset 1px 1px 2px hsl(220, 10, 20);
   border-radius: 12px;
@@ -14,7 +14,7 @@
   .itemsContainer {
     padding: 16px;
     h2 {
-      color: hsl(220, 10, 10);
+      color: hsl(220, 10, 20);
       font-size: 32px;
       margin: 0;
     }
@@ -27,6 +27,7 @@
         max-width: 800px;
         display: flex;
         flex-direction: column;
+       
         div {
           label {
             margin: 5px;
@@ -38,9 +39,15 @@
             }
           }
         }
+        label{
+          margin: 10px 0 3px 0;
+          text-align: left;
+          color: hsl(210, 20%, 40%);
+          font-weight: 500;
+        }
         input {
           border-radius: 5px;
-          margin: 8px 0 8px 0;
+          margin: 0 0 12px 0;
           padding: 16px;
           max-width: 600px;
           width: 100%;

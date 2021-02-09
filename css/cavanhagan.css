@@ -1,4 +1,5 @@
 .container {
+  font-family: "Inter", "Roboto";
   background-color: #f4f4f6;
   box-shadow: inset 1px 1px 2px #2e3138;
   border-radius: 12px;
@@ -14,7 +15,7 @@
   padding: 16px;
 }
 .container .itemsContainer h2 {
-  color: #17191c;
+  color: #2e3138;
   font-size: 32px;
   margin: 0;
 }
@@ -36,9 +37,15 @@
   max-width: 50px;
   margin: 0;
 }
+.container .itemsContainer .form form label {
+  margin: 10px 0 3px 0;
+  text-align: left;
+  color: #52667a;
+  font-weight: 500;
+}
 .container .itemsContainer .form form input {
   border-radius: 5px;
-  margin: 8px 0 8px 0;
+  margin: 0 0 12px 0;
   padding: 16px;
   max-width: 600px;
   width: 100%;

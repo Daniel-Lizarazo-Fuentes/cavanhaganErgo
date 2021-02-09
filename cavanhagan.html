@@ -2,8 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+   
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Inter"
+    />
     <style>
       .container {
+        font-family: "Inter", "Roboto";
         background-color: #f4f4f6;
         box-shadow: inset 1px 1px 2px #2e3138;
         border-radius: 12px;
@@ -19,7 +25,7 @@
         padding: 16px;
       }
       .container .itemsContainer h2 {
-        color: #17191c;
+        color: #2e3138;
         font-size: 32px;
         margin: 0;
       }
@@ -41,9 +47,15 @@
         max-width: 50px;
         margin: 0;
       }
+      .container .itemsContainer .form form label {
+        margin: 10px 0 3px 0;
+        text-align: left;
+        color: #52667a;
+        font-weight: 500;
+      }
       .container .itemsContainer .form form input {
         border-radius: 5px;
-        margin: 8px 0 8px 0;
+        margin: 0 0 12px 0;
         padding: 16px;
         max-width: 600px;
         width: 100%;
@@ -62,6 +74,7 @@
         padding: 10px 35px;
         box-shadow: inset 0 1px 3px #759ef0;
       }
+
       p {
         color: hsl(220, 10%, 45%);
       }
@@ -103,14 +116,16 @@
             weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
         }
 
-        let hours = Number(round(resultFormula / 3600, 0)) + " hour(s) and ";
+        let hours =
+          Number(Math.trunc(resultFormula / 3600, 0)) + " hour(s) and ";
         resultFormula = resultFormula % 3600;
-        let minutes = Number(round(resultFormula / 60, 0)) + " minute(s) and ";
+        let minutes =
+          Number(Math.trunc(resultFormula / 60, 0)) + " minute(s) and ";
         resultFormula = resultFormula % 60;
-        let seconds = Number(round(resultFormula, 0)) + " second(s) and ";
+        let seconds = Number(Math.trunc(resultFormula, 0)) + " second(s) and ";
         resultFormula = resultFormula % 1;
         let miliSeconds =
-          Number(round(resultFormula * 1000, 0)) + " milisecond(s)";
+          Number(Math.trunc(resultFormula * 1000, 0)) + " milisecond(s)";
 
         let finalResult = (document.getElementById("display").innerHTML =
           "Your estimated time for 2,000m of rowing is: " +
@@ -171,7 +186,7 @@
                 Other</label
               >
             </div>
-
+            <label for="height">Height</label>
             <input
               type="number"
               placeholder="Height in cm"
@@ -179,6 +194,7 @@
               id="user_Height"
               required
             />
+            <label for="weight">Weight</label>
             <input
               type="number"
               placeholder="Weight in kg"
@@ -186,6 +202,7 @@
               id="user_Weight"
               required
             />
+            <label for="arm_span">Arm span</label>
             <input
               type="number"
               placeholder="Arm Span in cm"
@@ -193,6 +210,7 @@
               id="arm_span"
               required
             />
+            <label for="leg_lenght">Leg lenght</label>
             <input
               type="number"
               placeholder="Leg lenght in cm"
@@ -200,6 +218,7 @@
               id="leg_lenght"
               required
             />
+            <label for="m100">100m</label>
             <input
               type="number"
               placeholder="100m in seconds"
@@ -207,6 +226,7 @@
               id="m100"
               required
             />
+            <label for="m500">500m</label>
             <input
               type="number"
               placeholder="500m in seconds"
@@ -214,6 +234,7 @@
               id="m500"
               required
             />
+            <label for="flexibility">Flexibility </label>
             <input
               type="number"
               placeholder="Flexibility in rating/10"
@@ -222,9 +243,10 @@
             />
           </form>
           <input class="submit" type="submit" onclick="calculate();" /><br />
-          <p><span id="display"></span></p>
         </div>
+        <p><span id="display"></span></p>
       </div>
+
       <div class="fake"></div>
     </div>
   </body>
