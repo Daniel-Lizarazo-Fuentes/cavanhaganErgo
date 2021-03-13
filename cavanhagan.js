@@ -16,9 +16,9 @@ function calculate() {
     0.308 * age -
     0.419 * arm_span;
   let result2000scull = 140.928 + 0.777 * result2000;
-
-  let values = parseTime(result2000);
   let valuesScull = parseTime(result2000scull);
+  let values = parseTime(result2000);
+  
 
   let finalResult = (document.getElementById("display").innerHTML =
     "Your estimated time for 2,000m ergometer is: " +
@@ -36,7 +36,7 @@ function parseTime(TimeSeconds) {
   TimeSeconds = TimeSeconds % 3600;
   let minutes = Number(Math.trunc(TimeSeconds / 60, 0)) + " minute(s) and ";
   TimeSeconds = TimeSeconds % 60;
-  let seconds = Number(Math.trunc(TimeSeconds, 0)) + " second(s)";
+  let seconds = Number(Math.trunc(TimeSeconds, 0));
   TimeSeconds = TimeSeconds % 1;
 
   let miliSeconds = Number(Math.trunc(TimeSeconds * 1000, 0));
@@ -44,7 +44,7 @@ function parseTime(TimeSeconds) {
   if (miliSeconds >= 500) {
     seconds++;
   }
-
+  seconds = seconds + " second(s)";
   return {
     hr: hours,
     min: minutes,
