@@ -78,6 +78,22 @@
       p {
         color: hsl(220, 10%, 45%);
       }
+      .container .itemsContainer hr {
+        max-width: 400px;
+      }
+      .container .itemsContainer h4 {
+        color: hsl(220, 10%, 35%);
+        font-size: 18px;
+        margin: 0;
+        line-height: 1.6rem;
+      }
+      .container .itemsContainer .antipy {
+        padding: 15px 0;
+      }
+      .container .itemsContainer .antipy img {
+        width: 160px;
+        height: 69.4px;
+      }
     </style>
     <script language="JavaScript">
       function calculate() {
@@ -120,7 +136,7 @@
         let minutes =
           Number(Math.trunc(TimeSeconds / 60, 0)) + " minute(s) and ";
         TimeSeconds = TimeSeconds % 60;
-        let seconds = Number(Math.trunc(TimeSeconds, 0)) + " second(s) and ";
+        let seconds = Number(Math.trunc(TimeSeconds, 0)) + " second(s)";
         TimeSeconds = TimeSeconds % 1;
 
         let miliSeconds = Number(Math.trunc(TimeSeconds * 1000, 0));
@@ -215,6 +231,15 @@
           <input class="submit" type="submit" onclick="calculate();" /><br />
         </div>
         <p><span id="display"></span></p>
+        <hr />
+        <h4>Embedded with the help of Antipy</h4>
+        <div class="antipy">
+          <a href="https://antipy.com/"
+            ><img
+              src="https://d33wubrfki0l68.cloudfront.net/cafb9092fddc1b6bb0d0817a07b2af356bca6571/49992/images/antipy.png"
+              alt="Antipy logo"
+          /></a>
+        </div>
       </div>
       <div class="fake"></div>
     </div>

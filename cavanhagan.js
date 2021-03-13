@@ -36,7 +36,7 @@ function parseTime(TimeSeconds) {
   TimeSeconds = TimeSeconds % 3600;
   let minutes = Number(Math.trunc(TimeSeconds / 60, 0)) + " minute(s) and ";
   TimeSeconds = TimeSeconds % 60;
-  let seconds = Number(Math.trunc(TimeSeconds, 0)) + " second(s) and ";
+  let seconds = Number(Math.trunc(TimeSeconds, 0)) + " second(s)";
   TimeSeconds = TimeSeconds % 1;
 
   let miliSeconds = Number(Math.trunc(TimeSeconds * 1000, 0));
