@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-   
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Inter"
@@ -89,51 +89,71 @@
           document.getElementById("leg_lenght").value
         );
         let m100 = parseFloat(document.getElementById("m100").value);
-        let m5000_String =document.getElementById("m5000").value.split(':')
-        let m5000 =   parseFloat(m5000_String[0])*60+parseFloat(m5000_String[1]);
+        let m5000_String = document.getElementById("m5000").value.split(":");
+        let m5000 =
+          parseFloat(m5000_String[0]) * 60 + parseFloat(m5000_String[1]);
         let flexibility = parseFloat(
           document.getElementById("flexibility").value
         );
-
-        // set resultFormula to -1, if something goes wrong here your time will be -1
-        let resultFormula = -1;
         let gender = getRadioVal(
           document.getElementById("calculateForm"),
           "gender"
         );
 
-        // different formulas based on male/female/other
-        if (gender === "female") {
-          //Insert formula when done
-          resultFormula =
-            weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
-        } else if (gender === "male") {
-          //Insert formula when done
-          resultFormula =
-            weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
-        } else {
-          //Insert formula when done
-          resultFormula =
-            weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
-        }
+        // set resultFormula to -1, if something goes wrong here your time will be -1
+        let result2000 = -1;
+        result2000 =
+          219.367 +
+          0.198 * m5000 +
+          5.162 * m100 -
+          0.539 * weight +
+          0.308 * age -
+          0.419 * arm_span;
+        let result2000scull = 140.928 + 0.777 * result2000;
 
-        let hours =
-          Number(Math.trunc(resultFormula / 3600, 0)) + " hour(s) and ";
-        resultFormula = resultFormula % 3600;
-        let minutes =
-          Number(Math.trunc(resultFormula / 60, 0)) + " minute(s) and ";
-        resultFormula = resultFormula % 60;
-        let seconds = Number(Math.trunc(resultFormula, 0)) + " second(s) and ";
-        resultFormula = resultFormula % 1;
-        let miliSeconds =
-          Number(Math.trunc(resultFormula * 1000, 0)) + " milisecond(s)";
+        // // You can uncomed the code below if you ever want to split on gender/have multiple formulas
+        // // different formulas based on male/female/other
+        // if (gender === "female") {
+        //   //Insert formula when done
+        //   resultFormula =
+        //     weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
+        // } else if (gender === "male") {
+        //   //Insert formula when done
+        //   resultFormula =
+        //     weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
+        // } else {
+        //   //Insert formula when done
+        //   resultFormula =
+        //     weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
+        // }
+
+let values = parseTime(result2000);
+let valuesScull = parseTime(result2000scull);
 
         let finalResult = (document.getElementById("display").innerHTML =
-          "Your estimated time for 2,000m of rowing is: " +
-          hours +
-          minutes +
-          seconds +
-          miliSeconds);
+          "Your estimated time for 2,000m ergometer is: " +
+          values.hr+ values.min+ values.sec+ values.ms+
+          "\nPredicted 2,000m single scull time: "+
+          valuesScull.hr+ valuesScull.min+ valuesScull.sec+ valuesScull.ms);
+      }
+
+      function parseTime(TimeSeconds) {
+        let hours = Number(Math.trunc(TimeSeconds / 3600, 0)) + " hour(s) and ";
+        TimeSeconds = TimeSeconds % 3600;
+        let minutes =
+          Number(Math.trunc(TimeSeconds / 60, 0)) + " minute(s) and ";
+        TimeSeconds = TimeSeconds % 60;
+        let seconds = Number(Math.trunc(TimeSeconds, 0)) + " second(s) and ";
+        TimeSeconds = TimeSeconds % 1;
+        let miliSeconds =
+          Number(Math.trunc(TimeSeconds * 1000, 0)) + " milisecond(s)";
+
+        return {
+          hr: hours,
+          min: minutes,
+          sec: seconds,
+          ms: miliSeconds,
+        };
       }
 
       //rounding function
