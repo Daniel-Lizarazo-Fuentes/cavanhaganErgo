@@ -82,6 +82,7 @@
     <script language="JavaScript">
       function calculate() {
         //get all values from the form and make them floats (kind of number)
+        let age = parseFloat(document.getElementById("user_Age").value);
         let weight = parseFloat(document.getElementById("user_Height").value);
         let height = parseFloat(document.getElementById("user_Weight").value);
         let arm_span = parseFloat(document.getElementById("arm_span").value);
@@ -133,7 +134,7 @@ let valuesScull = parseTime(result2000scull);
         let finalResult = (document.getElementById("display").innerHTML =
           "Your estimated time for 2,000m ergometer is: " +
           values.hr+ values.min+ values.sec+ values.ms+
-          "\nPredicted 2,000m single scull time: "+
+          "<br>\<br>\Predicted 2,000m single scull time: "+
           valuesScull.hr+ valuesScull.min+ valuesScull.sec+ valuesScull.ms);
       }
 
@@ -206,11 +207,18 @@ let valuesScull = parseTime(result2000scull);
                 ><input type="radio" id="other" name="gender" value="other" />
                 Other</label
               >
-            </div>
+            </div><label for="height">Age</label>
+            <input
+              type="number"
+              placeholder="Age in years (example: 25)"
+              name="message"
+              id="user_Age"
+              required
+            />
             <label for="height">Height</label>
             <input
               type="number"
-              placeholder="Height in cm"
+              placeholder="Height in cm (example: 175)"
               name="message"
               id="user_Height"
               required
@@ -218,7 +226,7 @@ let valuesScull = parseTime(result2000scull);
             <label for="weight">Weight</label>
             <input
               type="number"
-              placeholder="Weight in kg"
+              placeholder="Weight in kg (example: 75)"
               name="message"
               id="user_Weight"
               required
@@ -226,7 +234,7 @@ let valuesScull = parseTime(result2000scull);
             <label for="arm_span">Arm span</label>
             <input
               type="number"
-              placeholder="Arm Span in cm"
+              placeholder="Arm Span in cm (example: 175)"
               name="message"
               id="arm_span"
               required
@@ -234,7 +242,7 @@ let valuesScull = parseTime(result2000scull);
             <label for="leg_lenght">Leg lenght</label>
             <input
               type="number"
-              placeholder="Leg lenght in cm"
+              placeholder="Leg lenght in cm (example: 130)"
               name="message"
               id="leg_lenght"
               required
@@ -242,15 +250,15 @@ let valuesScull = parseTime(result2000scull);
             <label for="m100">100m</label>
             <input
               type="number"
-              placeholder="100m in seconds"
+              placeholder="100m in seconds (example: 18.2)"
               name="message"
               id="m100"
               required
             />
             <label for="m5000">5000m</label>
             <input
-              type="number"
-              placeholder="500m in m:s"
+              type="text"
+              placeholder="5000m in m:s (example: 18:20)"
               name="message"
               id="m5000"
               required
