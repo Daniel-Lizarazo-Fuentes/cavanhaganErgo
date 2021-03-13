@@ -81,27 +81,15 @@
     </style>
     <script language="JavaScript">
       function calculate() {
-        //get all values from the form and make them floats (kind of number)
+        //get all values from the form and make them floats (kind of number) and string for 5000m which needs to be parsed back into normal numbers
         let age = parseFloat(document.getElementById("user_Age").value);
-        let weight = parseFloat(document.getElementById("user_Height").value);
-        let height = parseFloat(document.getElementById("user_Weight").value);
+        let weight = parseFloat(document.getElementById("user_Weight").value);
         let arm_span = parseFloat(document.getElementById("arm_span").value);
-        let leg_lenght = parseFloat(
-          document.getElementById("leg_lenght").value
-        );
         let m100 = parseFloat(document.getElementById("m100").value);
         let m5000_String = document.getElementById("m5000").value.split(":");
         let m5000 =
           parseFloat(m5000_String[0]) * 60 + parseFloat(m5000_String[1]);
-        let flexibility = parseFloat(
-          document.getElementById("flexibility").value
-        );
-        let gender = getRadioVal(
-          document.getElementById("calculateForm"),
-          "gender"
-        );
 
-        // set resultFormula to -1, if something goes wrong here your time will be -1
         let result2000 = -1;
         result2000 =
           219.367 +
@@ -112,30 +100,18 @@
           0.419 * arm_span;
         let result2000scull = 140.928 + 0.777 * result2000;
 
-        // // You can uncomed the code below if you ever want to split on gender/have multiple formulas
-        // // different formulas based on male/female/other
-        // if (gender === "female") {
-        //   //Insert formula when done
-        //   resultFormula =
-        //     weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
-        // } else if (gender === "male") {
-        //   //Insert formula when done
-        //   resultFormula =
-        //     weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
-        // } else {
-        //   //Insert formula when done
-        //   resultFormula =
-        //     weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
-        // }
-
-let values = parseTime(result2000);
-let valuesScull = parseTime(result2000scull);
+        let values = parseTime(result2000);
+        let valuesScull = parseTime(result2000scull);
 
         let finalResult = (document.getElementById("display").innerHTML =
           "Your estimated time for 2,000m ergometer is: " +
-          values.hr+ values.min+ values.sec+ values.ms+
-          "<br>\<br>\Predicted 2,000m single scull time: "+
-          valuesScull.hr+ valuesScull.min+ valuesScull.sec+ valuesScull.ms);
+          values.hr +
+          values.min +
+          values.sec +
+          "<br><br>Predicted 2,000m single scull time: " +
+          valuesScull.hr +
+          valuesScull.min +
+          valuesScull.sec);
       }
 
       function parseTime(TimeSeconds) {
@@ -146,14 +122,17 @@ let valuesScull = parseTime(result2000scull);
         TimeSeconds = TimeSeconds % 60;
         let seconds = Number(Math.trunc(TimeSeconds, 0)) + " second(s) and ";
         TimeSeconds = TimeSeconds % 1;
-        let miliSeconds =
-          Number(Math.trunc(TimeSeconds * 1000, 0)) + " milisecond(s)";
+
+        let miliSeconds = Number(Math.trunc(TimeSeconds * 1000, 0));
+
+        if (miliSeconds >= 500) {
+          seconds++;
+        }
 
         return {
           hr: hours,
           min: minutes,
           sec: seconds,
-          ms: miliSeconds,
         };
       }
 
@@ -192,35 +171,12 @@ let valuesScull = parseTime(result2000scull);
         <h2>2,000m Rowing Ergometer Estimator</h2>
         <div class="form">
           <form id="calculateForm">
-            <div>
-              <label for="male"
-                ><input type="radio" id="male" name="gender" value="male" />
-                Male</label
-              >
-
-              <label for="female">
-                <input type="radio" id="female" name="gender" value="female" />
-                Female</label
-              >
-
-              <label for="other"
-                ><input type="radio" id="other" name="gender" value="other" />
-                Other</label
-              >
-            </div><label for="height">Age</label>
+            <label for="age">Age</label>
             <input
               type="number"
               placeholder="Age in years (example: 25)"
               name="message"
               id="user_Age"
-              required
-            />
-            <label for="height">Height</label>
-            <input
-              type="number"
-              placeholder="Height in cm (example: 175)"
-              name="message"
-              id="user_Height"
               required
             />
             <label for="weight">Weight</label>
@@ -239,14 +195,6 @@ let valuesScull = parseTime(result2000scull);
               id="arm_span"
               required
             />
-            <label for="leg_lenght">Leg lenght</label>
-            <input
-              type="number"
-              placeholder="Leg lenght in cm (example: 130)"
-              name="message"
-              id="leg_lenght"
-              required
-            />
             <label for="m100">100m</label>
             <input
               type="number"
@@ -263,19 +211,11 @@ let valuesScull = parseTime(result2000scull);
               id="m5000"
               required
             />
-            <label for="flexibility">Flexibility </label>
-            <input
-              type="number"
-              placeholder="Flexibility in rating/10"
-              id="flexibility"
-              required
-            />
           </form>
           <input class="submit" type="submit" onclick="calculate();" /><br />
         </div>
         <p><span id="display"></span></p>
       </div>
-
       <div class="fake"></div>
     </div>
   </body>
