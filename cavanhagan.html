@@ -89,7 +89,8 @@
           document.getElementById("leg_lenght").value
         );
         let m100 = parseFloat(document.getElementById("m100").value);
-        let m500 = parseFloat(document.getElementById("m500").value);
+        let m5000_String =document.getElementById("m5000").value.split(':')
+        let m5000 =   parseFloat(m5000_String[0])*60+parseFloat(m5000_String[1]);
         let flexibility = parseFloat(
           document.getElementById("flexibility").value
         );
@@ -105,15 +106,15 @@
         if (gender === "female") {
           //Insert formula when done
           resultFormula =
-            weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
+            weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
         } else if (gender === "male") {
           //Insert formula when done
           resultFormula =
-            weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
+            weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
         } else {
           //Insert formula when done
           resultFormula =
-            weight + height + arm_span + leg_lenght + m100 + m500 + flexibility;
+            weight + height + arm_span + leg_lenght + m100 + m5000 + flexibility;
         }
 
         let hours =
@@ -226,12 +227,12 @@
               id="m100"
               required
             />
-            <label for="m500">500m</label>
+            <label for="m5000">5000m</label>
             <input
               type="number"
-              placeholder="500m in seconds"
+              placeholder="500m in m:s"
               name="message"
-              id="m500"
+              id="m5000"
               required
             />
             <label for="flexibility">Flexibility </label>
